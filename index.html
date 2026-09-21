@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌻 Para Mi Torochi 🌻</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #000010;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        /* ===== FONDO ESPACIAL ===== */
+        .espacio {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .estrella {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: brillar 3s infinite;
+        }
+
+        @keyframes brillar {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* ===== TARJETA PRINCIPAL ===== */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 40px;
+            padding: 50px 40px;
+            text-align: center;
+            max-width: 700px;
+            width: 92%;
+            margin: 40px auto;
+            box-shadow: 0 0 80px rgba(255, 215, 0, 0.15), inset 0 0 50px rgba(255, 215, 0, 0.05);
+            position: relative;
+            z-index: 20;
+            animation: aparecer 2s ease;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: scale(0.8) translateY(50px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .gatito {
+            font-size: 70px;
+            display: block;
+            margin-bottom: 10px;
+            animation: flotar 3s ease-in-out infinite;
+        }
+
+        .ramo {
+            font-size: 40px;
+            display: block;
+            animation: flotar 2.5s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #ffd700;
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-size: 22px;
+            color: #ffed4a;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .linea {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            margin: 0 auto 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #ffd700;
+        }
+
+        p {
+            color: #f0e6ff;
+            font-size: 17px;
+            line-height: 2;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .destacado {
+            color: #ffd700;
+            font-weight: 600;
+            font-size: 19px;
+        }
+
+        .poema {
+            background: rgba(255, 215, 0, 0.08);
+            border-radius: 25px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            font-style: italic;
+            color: #ffe066;
+            font-size: 17px;
+            line-height: 2;
+        }
+
+        .firma {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 30px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .corazon {
+            font-size: 50px;
+            animation: latir 1.5s infinite;
+            display: block;
+            margin-top: 15px;
+        }
+
+        @keyframes latir {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.25); }
+        }
+
+        /* ===== BOTÓN SORPRESA ===== */
+        .btn-sorpresa {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 16px 50px;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #000010;
+            font-weight: 700;
+            font-size: 17px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            letter-spacing: 1.5px;
+            transition: 0.3s ease;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-sorpresa:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.9);
+        }
+
+        /* ===== SECCIÓN DEL AGUJERO NEGRO ===== */
+        .seccion-agujero {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000010;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .seccion-agujero.mostrar {
+            display: flex;
+            animation: aparecer 1s ease;
+        }
+
+        /* AGUJERO NEGRO */
+        .agujero-negro {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .agujero-negro::before {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: #000;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 60px 20px rgba(138, 43, 226, 0.6),
+                0 0 120px 40px rgba(75, 0, 130, 0.4),
+                0 0 200px 80px rgba(25, 25, 112, 0.2);
+            z-index: 5;
+            animation: pulso 3s infinite;
+        }
+
+        @keyframes pulso {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .agujero-negro::after {
+            content: '';
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 2px dashed rgba(138, 43, 226, 0.5);
+            animation: girar 8s linear infinite;
+            z-index: 4;
+        }
+
+        @keyframes girar {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* PALABRAS GIRANDO */
+        .palabra-girando {
+            position: absolute;
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+            white-space: nowrap;
+            z-index: 6;
+            animation: girarPalabra linear infinite;
+            transform-origin: center;
+        }
+
+        @keyframes girarPalabra {
+            0% { transform: rotate(0deg) translateX(180px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
+        }
+
+        /* TÍTULO DEL AGUJERO */
+        .titulo-agujero {
+            position: absolute;
+            top: 15%;
+            color: #ffd700;
+            font-size: 28px;
+            text-align: center;
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+            z-index: 20;
+            padding: 0 20px;
+            animation: brillar 3s infinite;
+        }
+
+        .subtitulo-agujero {
+            position: absolute;
+            bottom: 15%;
+            color: #f0e6ff;
+            font-size: 18px;
+            text-align: center;
+            z-index: 20;
+            padding: 0 20px;
+            font-style: italic;
+        }
+
+        /* BOTÓN CERRAR */
+        .btn-cerrar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 215, 0, 0.2);
+            border: 1px solid #ffd700;
+            color: #ffd700;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 30;
+            transition: 0.3s ease;
+        }
+
+        .btn-cerrar:hover {
+            background: #ffd700;
+            color: #000;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            h2 { font-size: 18px; }
+            .card { padding: 35px 22px; }
+            .gatito { font-size: 50px; }
+            .ramo { font-size: 30px; }
+            p { font-size: 15px; }
+            .poema { font-size: 15px; padding: 18px; }
+            .btn-sorpresa { font-size: 14px; padding: 14px 35px; }
+            .agujero-negro { width: 220px; height: 220px; }
+            .agujero-negro::before { width: 80px; height: 80px; }
+            .agujero-negro::after { width: 140px; height: 140px; }
+            .palabra-girando { font-size: 13px; }
+            .titulo-agujero { font-size: 20px; }
+            .subtitulo-agujero { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FONDO ESPACIAL -->
+    <div class="espacio" id="espacio"></div>
+
+    <!-- TARJETA PRINCIPAL -->
+    <div class="card">
+        <span class="gatito">🐱</span>
+        <span class="ramo">🌻🌻🌻</span>
+
+        <h1>Feliz Día de las Flores Amarillas</h1>
+        <h2>Para ti, mi Torochi 💛</h2>
+        <div class="linea"></div>
+
+        <p>
+            Hoy, <span class="destacado">21 de septiembre</span>, se celebra el día de las flores amarillas.
+            Y aunque la distancia nos separe, quería regalarte algo especial.
+        </p>
+
+        <p>
+            No puedo darte flores físicas, pero sí puedo darte algo hecho
+            con el corazón: esta página es para ti, mi 
+            <span class="destacado">María Victoria</span>.
+        </p>
+
+        <div class="poema">
+            "Quise hacer algo diferente, algo que pudiera mostrar<br>
+            lo que siento por ti, algo que ni las palabras puedan explicar.<br><br>
+
+            Miré al cielo, miré las estrellas, miré el universo entero,<br>
+            y me di cuenta de algo: tú eres todo eso para mí.<br><br>
+
+            Eres mi universo, mi galaxia, mi planeta favorito.<br>
+            Y no me quiero ir nunca de ti."
+        </div>
+
+        <p>
+            Gracias por estar conmigo a pesar de la distancia, por cada 
+            mensaje, por cada llamada, por cada momento. 
+            <span class="destacado">Te amo con todo mi corazón.</span>
+        </p>
+
+        <span class="corazon">💛</span>
+
+        <div class="firma">
+            Con amor, tu novio 💛
+        </div>
+
+        <button class="btn-sorpresa" onclick="mostrarAgujero()">
+            🌌 Toca aquí para una sorpresa 🌌
+        </button>
+    </div>
+
+    <!-- SECCIÓN DEL AGUJERO NEGRO -->
+    <div class="seccion-agujero" id="agujeroSeccion">
+        <button class="btn-cerrar" onclick="cerrarAgujero()">✖ Cerrar</button>
+        <div class="titulo-agujero" id="tituloAgujero">Mi universo entero 💛</div>
+        <div class="agujero-negro" id="agujero"></div>
+        <div class="subtitulo-agujero" id="subtituloAgujero">
+            Cada palabra gira alrededor de ti...
+        </div>
+    </div>
+
+    <script>
+        // ===== CREAR ESTRELLAS =====
+        const espacio = document.getElementById('espacio');
+        for (let i = 0; i < 200; i++) {
+            const estrella = document.createElement('div');
+            estrella.className = 'estrella';
+            const tamaño = Math.random() * 3 + 1;
+            estrella.style.width = tamaño + 'px';
+            estrella.style.height = tamaño + 'px';
+            estrella.style.left = Math.random() * 100 + '%';
+            estrella.style.top = Math.random() * 100 + '%';
+            estrella.style.animationDelay = Math.random() * 3 + 's';
+            estrella.style.animationDuration = (2 + Math.random() * 3) + 's';
+            espacio.appendChild(estrella);
+        }
+
+        // ===== PALABRAS HERMOSAS =====
+        const palabras = [
+            'Mi amor 💛',
+            'Mi Torochi 🌻',
+            'Mamor 💛',
+            'Mi universo 🌌',
+            'Mi galaxia ✨',
+            'Mi persona favorita 💫',
+            'Mi todo 🌟',
+            'Te amo 💛',
+            'Mi vida 🌻',
+            'Mi corazón ❤️',
+            'Mi princesa 👑',
+            'Mi compañera 💛',
+            'Mi felicidad 😊',
+            'Mi razón 🌟',
+            'Eres perfecta ✨',
+            'Mi sueño 💫',
+            'Mi estrella ⭐',
+            'Mi paz 🕊️',
+            'Mi alegría 🌻',
+            'Mi futuro 💛'
+        ];
+
+        // ===== MOSTRAR AGUJERO NEGRO =====
+        function mostrarAgujero() {
+            const seccion = document.getElementById('agujeroSeccion');
+            const agujero = document.getElementById('agujero');
+            const titulo = document.getElementById('tituloAgujero');
+            const subtitulo = document.getElementById('subtituloAgujero');
+
+            seccion.classList.add('mostrar');
+
+            // Limpiar palabras anteriores
+            agujero.innerHTML = '';
+
+            // Crear palabras girando
+            palabras.forEach((palabra, index) => {
+                const el = document.createElement('div');
+                el.className = 'palabra-girando';
+                el.textContent = palabra;
+                el.style.animationDuration = (8 + Math.random() * 6) + 's';
+                el.style.animationDelay = (index * 0.3) + 's';
+                el.style.color = ['#ffd700', '#ffed4a', '#ffe066', '#fff8dc'][Math.floor(Math.random() * 4)];
+                el.style.fontSize = (14 + Math.random() * 8) + 'px';
+                agujero.appendChild(el);
+            });
+
+            // Cambiar título cada cierto tiempo
+            let i = 0;
+            setInterval(() => {
+                if (!seccion.classList.contains('mostrar')) return;
+                titulo.textContent = palabras[i % palabras.length];
+                i++;
+            }, 2000);
+
+            // Subtítulo
+            subtitulo.textContent = 'Cada palabra gira alrededor de ti, porque tú eres mi universo entero 💛';
+        }
+
+        // ===== CERRAR AGUJERO =====
+        function cerrarAgujero() {
+            const seccion = document.getElementById('agujeroSeccion');
+            seccion.classList.remove('mostrar');
+        }
+
+        // ===== CONFETI DE FLORES AL ABRIR =====
+        function lanzarConfeti() {
+            for (let i = 0; i < 30; i++) {
+                const flor = document.createElement('div');
+                flor.textContent = ['🌻', '💛', '⭐', '✨'][Math.floor(Math.random() * 4)];
+                flor.style.position = 'fixed';
+                flor.style.left = Math.random() * 100 + '%';
+                flor.style.top = '-50px';
+                flor.style.fontSize = (20 + Math.random() * 20) + 'px';
+                flor.style.zIndex = '999';
+                flor.style.animation = `caerConfeti ${3 + Math.random() * 3}s linear forwards`;
+                document.body.appendChild(flor);
+
+                setTimeout(() => flor.remove(), 6000);
+            }
+        }
+
+        // Agregar animación de confeti
+        const styleConfeti = document.createElement('style');
+        styleConfeti.textContent = `
+            @keyframes caerConfeti {
+                0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+                100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(styleConfeti);
+
+        // Lanzar confeti al abrir el agujero
+        const originalMostrar = mostrarAgujero;
+        window.mostrarAgujero = function() {
+            originalMostrar();
+            lanzarConfeti();
+        };
+    </script>
+
+</body>
+</html>
