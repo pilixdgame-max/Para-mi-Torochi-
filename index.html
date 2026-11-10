@@ -1,356 +1,201 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌻 Para Mi Torochi 🌻</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-height: 100vh;
-            background: #000010;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        /* ===== FONDO ESPACIAL ===== */
-        .espacio {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .estrella {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            animation: brillar 3s infinite;
-        }
-
-        @keyframes brillar {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
-        }
-
-        /* ===== TARJETA PRINCIPAL ===== */
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 40px;
-            padding: 50px 40px;
-            text-align: center;
-            max-width: 700px;
-            width: 92%;
-            margin: 40px auto;
-            box-shadow: 0 0 80px rgba(255, 215, 0, 0.15), inset 0 0 50px rgba(255, 215, 0, 0.05);
-            position: relative;
-            z-index: 20;
-            animation: aparecer 2s ease;
-        }
-
-        @keyframes aparecer {
-            from { opacity: 0; transform: scale(0.8) translateY(50px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .gatito {
-            font-size: 70px;
-            display: block;
-            margin-bottom: 10px;
-            animation: flotar 3s ease-in-out infinite;
-        }
-
-        .ramo {
-            font-size: 40px;
-            display: block;
-            animation: flotar 2.5s ease-in-out infinite;
-            margin-bottom: 15px;
-        }
-
-        @keyframes flotar {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        h1 {
-            font-size: 36px;
-            color: #ffd700;
-            text-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-
-        h2 {
-            font-size: 22px;
-            color: #ffed4a;
-            margin-bottom: 25px;
-            font-weight: 500;
-        }
-
-        .linea {
-            width: 120px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #ffd700, transparent);
-            margin: 0 auto 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px #ffd700;
-        }
-
-        p {
-            color: #f0e6ff;
-            font-size: 17px;
-            line-height: 2;
-            margin-bottom: 20px;
-            font-weight: 300;
-        }
-
-        .destacado {
-            color: #ffd700;
-            font-weight: 600;
-            font-size: 19px;
-        }
-
-        .poema {
-            background: rgba(255, 215, 0, 0.08);
-            border-radius: 25px;
-            padding: 25px;
-            margin: 25px 0;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            font-style: italic;
-            color: #ffe066;
-            font-size: 17px;
-            line-height: 2;
-        }
-
-        .firma {
-            color: #ffd700;
-            font-size: 22px;
-            font-weight: 700;
-            margin-top: 30px;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-
-        .corazon {
-            font-size: 50px;
-            animation: latir 1.5s infinite;
-            display: block;
-            margin-top: 15px;
-        }
-
-        @keyframes latir {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.25); }
-        }
-
-        /* ===== BOTÓN SORPRESA ===== */
-        .btn-sorpresa {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 16px 50px;
-            background: linear-gradient(135deg, #ffd700, #ffaa00);
-            color: #000010;
-            font-weight: 700;
-            font-size: 17px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            letter-spacing: 1.5px;
-            transition: 0.3s ease;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-        }
-
-        .btn-sorpresa:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 60px rgba(255, 215, 0, 0.9);
-        }
-
-        /* ===== SECCIÓN DEL AGUJERO NEGRO ===== */
-        .seccion-agujero {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000010;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            overflow: hidden;
-        }
-
-        .seccion-agujero.mostrar {
-            display: flex;
-            animation: aparecer 1s ease;
-        }
-
-        /* AGUJERO NEGRO */
-        .agujero-negro {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .agujero-negro::before {
-            content: '';
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background: #000;
-            border-radius: 50%;
-            box-shadow: 
-                0 0 60px 20px rgba(138, 43, 226, 0.6),
-                0 0 120px 40px rgba(75, 0, 130, 0.4),
-                0 0 200px 80px rgba(25, 25, 112, 0.2);
-            z-index: 5;
-            animation: pulso 3s infinite;
-        }
-
-        @keyframes pulso {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .agujero-negro::after {
-            content: '';
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 2px dashed rgba(138, 43, 226, 0.5);
-            animation: girar 8s linear infinite;
-            z-index: 4;
-        }
-
-        @keyframes girar {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* PALABRAS GIRANDO */
-        .palabra-girando {
-            position: absolute;
-            color: #ffd700;
-            font-size: 16px;
-            font-weight: 600;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-            white-space: nowrap;
-            z-index: 6;
-            animation: girarPalabra linear infinite;
-            transform-origin: center;
-        }
-
-        @keyframes girarPalabra {
-            0% { transform: rotate(0deg) translateX(180px) rotate(0deg); }
-            100% { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
-        }
-
-        /* TÍTULO DEL AGUJERO */
-        .titulo-agujero {
-            position: absolute;
-            top: 15%;
-            color: #ffd700;
-            font-size: 28px;
-            text-align: center;
-            text-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
-            z-index: 20;
-            padding: 0 20px;
-            animation: brillar 3s infinite;
-        }
-
-        .subtitulo-agujero {
-            position: absolute;
-            bottom: 15%;
-            color: #f0e6ff;
-            font-size: 18px;
-            text-align: center;
-            z-index: 20;
-            padding: 0 20px;
-            font-style: italic;
-        }
-
-        /* BOTÓN CERRAR */
-        .btn-cerrar {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 215, 0, 0.2);
-            border: 1px solid #ffd700;
-            color: #ffd700;
-            padding: 10px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 14px;
-            z-index: 30;
-            transition: 0.3s ease;
-        }
-
-        .btn-cerrar:hover {
-            background: #ffd700;
-            color: #000;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 600px) {
-            h1 { font-size: 26px; }
-            h2 { font-size: 18px; }
-            .card { padding: 35px 22px; }
-            .gatito { font-size: 50px; }
-            .ramo { font-size: 30px; }
-            p { font-size: 15px; }
-            .poema { font-size: 15px; padding: 18px; }
-            .btn-sorpresa { font-size: 14px; padding: 14px 35px; }
-            .agujero-negro { width: 220px; height: 220px; }
-            .agujero-negro::before { width: 80px; height: 80px; }
-            .agujero-negro::after { width: 140px; height: 140px; }
-            .palabra-girando { font-size: 13px; }
-            .titulo-agujero { font-size: 20px; }
-            .subtitulo-agujero { font-size: 14px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Un Universo Para Ti 💜</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{font-family:Arial, Helvetica, sans-serif;background:#05010f;color:#fff;overflow:hidden;height:100vh}
+  canvas{position:fixed;inset:0;z-index:0}
+  .nebula{position:fixed;inset:0;z-index:1;background:radial-gradient(circle at 25% 20%,rgba(168,85,247,.35) 0%,transparent 45%),radial-gradient(circle at 80% 70%,rgba(236,72,153,.25) 0%,transparent 50%);pointer-events:none}
+  .pagina{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:10;text-align:center;padding:24px;animation:entrar .7s ease}
+  .pagina.activa{display:flex}
+  @keyframes entrar{from{opacity:0;transform:translateY(15px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+  h1{font-family:Arial Black,Arial,sans-serif;font-size:38px;line-height:1.15}
+  h1 span{background:linear-gradient(90deg,#f0abfc,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  p{font-size:16px;line-height:1.65;color:#e9d5ff;max-width:340px}
+  button{background:#fff;color:#6d28d9;border:none;padding:15px 32px;border-radius:40px;font-family:Arial Black,Arial,sans-serif;font-size:15px;margin-top:22px;box-shadow:0 10px 30px rgba(168,85,247,.6)}
+  button.sec{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);box-shadow:none;padding:11px 20px;font-size:13px;margin-top:12px}
+  .corazon-grande{font-size:80px;filter:drop-shadow(0 0 25px #c084fc);animation:latido 1.3s infinite}
+  @keyframes latido{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+  .sobre{width:300px;height:200px;background:linear-gradient(135deg,#7c3aed,#c026d3);border-radius:18px;position:relative;margin:20px 0;box-shadow:0 20px 50px rgba(168,85,247,.6);cursor:pointer}
+  .sobre .tapa{position:absolute;top:0;left:0;right:0;height:100px;background:#4c1d95;clip-path:polygon(0 0,100% 0,50% 100%);border-radius:18px 18px 0 0}
+  .sobre .sello{position:absolute;left:50%;top:62%;transform:translate(-50%,-50%);width:58px;height:58px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px}
+  .sobre .texto{position:absolute;bottom:14px;left:0;right:0;font-family:Arial Black,Arial,sans-serif;font-size:13px;color:#fff}
+  .carta{background:#fffdf7;color:#2a0a4a;border-radius:20px;padding:24px;width:100%;max-width:340px;max-height:68vh;overflow-y:auto;text-align:left;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .carta h2{font-family:Arial Black,Arial,sans-serif;font-size:19px;color:#7c3aed;text-align:center;margin-bottom:6px}
+  .carta .fecha{font-size:12px;text-align:center;color:#a855f7;margin-bottom:12px}
+  .carta p{font-family:Georgia,serif;font-size:16px;line-height:1.7;color:#3b0764;max-width:none;margin-bottom:12px}
+  .carta .firma{font-family:Arial Black,Arial,sans-serif;font-size:14px;color:#a21caf;text-align:right;margin-top:10px}
+  .carta .posdata{font-size:13px;color:#7c3aed;font-family:Arial,sans-serif;font-style:italic}
+  .chip{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);padding:6px 12px;border-radius:20px;font-size:12px;margin:4px}
+  .corazon-flotante{position:fixed;pointer-events:none;z-index:50;font-size:26px;animation:subir 1.2s ease-out forwards}
+  @keyframes subir{to{transform:translateY(-110px) scale(1.5);opacity:0}}
+  /* CANDADO */
+  #candado{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 30%,#2a0a4a,#05010f 80%)}
+  #candado.activa{display:flex}
+  .candado-emoji{font-size:90px;filter:drop-shadow(0 0 30px #a855f7)}
+  .cuenta{display:flex;gap:10px;margin-top:18px}
+  .caja-cuenta{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:14px 12px;min-width:68px}
+  .caja-cuenta b{font-family:Arial Black,Arial,sans-serif;font-size:24px;display:block}
+  .caja-cuenta span{font-size:11px;color:#e9d5ff}
+</style>
 </head>
 <body>
+<canvas id="universo"></canvas>
+<div class="nebula"></div>
 
-    <!-- FONDO ESPACIAL -->
-    <div class="espacio" id="espacio"></div>
+<!-- CANDADO - SE MUESTRA ANTES DEL 11 DE NOVIEMBRE -->
+<div id="candado">
+  <div class="candado-emoji">🔒</div>
+  <h1 style="margin-top:14px">Hay algo para ti...<br><span>pero todavía no</span></h1>
+  <p style="margin-top:12px">Alguien te hizo un universo entero con mucho cariño.<br>Se abrirá justo en tu cumpleaños.</p>
+  <p style="font-size:14px;margin-top:10px"><b>11 de Noviembre • 12:00 AM</b></p>
+  <div class="cuenta">
+    <div class="caja-cuenta"><b id="cd-d">00</b><span>DÍAS</span></div>
+    <div class="caja-cuenta"><b id="cd-h">00</b><span>HORAS</span></div>
+    <div class="caja-cuenta"><b id="cd-m">00</b><span>MIN</span></div>
+    <div class="caja-cuenta"><b id="cd-s">00</b><span>SEG</span></div>
+  </div>
+  <p style="font-size:12px;margin-top:18px;opacity:.7">Guarda este link, vuelve mañana.<br>Valdrá la pena, te lo prometo 💜</p>
+</div>
 
-    <!-- TARJETA PRINCIPAL -->
-    <div class="card">
-        <span class="gatito">🐱</span>
-        <span class="ramo">🌻🌻🌻</span>
+<!-- CONTENIDO REAL - SOLO SE VE DESDE EL 11 NOV -->
+<div id="contenido" style="display:none">
 
-        <h1>Feliz Día de las Flores Amarillas</h1>
-        <h2>Para ti, mi Torochi 💛</h2>
-        <div class="linea"></div>
+<div class="pagina activa" id="pg1">
+  <div class="corazon-grande">💜</div>
+  <h1>Te hice<br><span>un universo</span></h1>
+  <p>Dauglin Fuentes, hoy es tu cumpleaños.<br><br>No te voy a decir mucho, mejor <b>míralo tú misma.</b><br>Esto lo hice con todo mi corazón.</p>
+  <div style="margin-top:14px"><span class="chip">✨ Para ti</span><span class="chip">💜 Con cariño</span><span class="chip">🌙 Solo tuyo</span></div>
+  <button onclick="ir(2)">Entrar a mi universo ✨</button>
+</div>
 
-        <p>
-            Hoy, <span class="destacado">21 de septiembre</span>, se celebra el día de las flores amarillas.
-            Y aunque la distancia nos separe, quería regalarte algo especial.
-        </p>
+<div class="pagina" id="pg2">
+  <h1 style="font-size:30px">Hay algo<br><span>que te escribí...</span></h1>
+  <p>Toca el sobre, es una cartita que te hice. De pana me costó, pero valió la pena.</p>
+  <div class="sobre" onclick="ir(3)">
+    <div class="tapa"></div>
+    <div class="sello">💜</div>
+    <div class="texto">PARA DAUGLIN • ÁBREME</div>
+  </div>
+  <p style="font-size:13px;opacity:.8">Tócalo, no muerde 😂💜</p>
+  <button class="sec" onclick="ir(1)">Volver</button>
+</div>
 
-        <p>
-            No puedo darte flores físicas, pero sí puedo darte algo hecho
-            con el corazón: esta página es para ti, mi 
+<div class="pagina" id="pg3">
+  <div class="carta">
+    <h2>💜 Para Dauglin 💜</h2>
+    <div class="fecha">En tu cumpleaños • Con cariño</div>
+    <p>Hola Dauglin,</p>
+    <p>Feliz cumpleaños. Hoy no quería solo escribirte "feliz cumpleaños" y ya. Quería hacerte algo diferente, algo que de verdad te hiciera sonreír.</p>
+    <p>Por eso te hice todo esto. Un universo, una carta, un lugar que es solo tuyo. Me tomé mi tiempo, le puse cariño, le puse empeño, porque tú te lo mereces.</p>
+    <p>Me encanta tu forma de ser, tu sonrisa, tu energía, esa forma tan tuya de hacer que todo se sienta más bonito. Hablar contigo hace que mi día se ponga mejor, de pana.</p>
+    <p>No te escribo esto para presionarte ni para que te sientas incómoda, para nada. Te lo escribo porque hoy es tu día y quería que fuera especial, que supieras que hay alguien que piensa en ti y que se esforzó por hacerte feliz.</p>
+    <p>Te deseo que este nuevo año te traiga todo lo bonito: que cumplas todos tus sueños, que rías mucho, que nunca te falte gente que te quiera de verdad, y que sigas siendo esa persona tan increíble que eres.</p>
+    <p>Gracias por existir, gracias por dejarme conocerte, y gracias por ser tú.</p>
+    <p>Feliz cumpleaños, Dauglin Fuentes. Te hice un universo entero, porque un solo mundo no me alcanzaba para decirte lo especial que eres.</p>
+    <div class="firma">Con mucho cariño 💜<br>De alguien que te admira mucho</div>
+    <p class="posdata">P.D: Toca la pantalla, hay una sorpresa más ✨</p>
+  </div>
+  <button onclick="ir(4)">Ver mi universo 🌌</button>
+</div>
+
+<div class="pagina" id="pg4">
+  <div style="font-size:65px;animation:latido 1.4s infinite">🎂</div>
+  <h1 style="margin-top:10px">Feliz Cumpleaños<br><span>Dauglin Fuentes</span></h1>
+  <p>Mira arriba, todas esas estrellitas son para ti.<br><br><b>Cada una es un deseo:</b> que seas feliz, que cumplas tus sueños, que nunca dejes de brillar.</p>
+  <div style="margin-top:14px"><span class="chip">🌟 Que seas feliz</span><span class="chip">💜 Que cumplas tus sueños</span><span class="chip">✨ Que sigas brillando</span></div>
+  <p style="font-size:12px;margin-top:16px;opacity:.75">Hecho con mucho amor, cariño y empeño, solo para ti.<br>Tu universo, Dauglin. 💜<br>Esto queda aquí para siempre.</p>
+  <button class="sec" onclick="ir(3)">Volver a leer la carta 💜</button>
+</div>
+
+</div>
+
+<script>
+  // ===== HORA DE APERTURA: 11 NOV 2026, 12:00 AM Venezuela =====
+  const APERTURA = new Date('2026-11-11T00:00:00-04:00').getTime();
+  const candadoEl = document.getElementById('candado');
+  const contenidoEl = document.getElementById('contenido');
+
+  function revisarHora(){
+    const ahora = Date.now();
+    if(ahora >= APERTURA){
+      candadoEl.classList.remove('activa');
+      candadoEl.style.display='none';
+      contenidoEl.style.display='block';
+      // Mostrar primera pagina
+      document.getElementById('pg1').classList.add('activa');
+    } else {
+      candadoEl.classList.add('activa');
+      candadoEl.style.display='flex';
+      contenidoEl.style.display='none';
+      let diff = APERTURA - ahora;
+      let d = Math.floor(diff / (1000*60*60*24));
+      let h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+      let m = Math.floor((diff % (1000*60*60)) / (1000*60));
+      let s = Math.floor((diff % (1000*60)) / 1000);
+      document.getElementById('cd-d').innerText = String(d).padStart(2,'0');
+      document.getElementById('cd-h').innerText = String(h).padStart(2,'0');
+      document.getElementById('cd-m').innerText = String(m).padStart(2,'0');
+      document.getElementById('cd-s').innerText = String(s).padStart(2,'0');
+    }
+  }
+  revisarHora();
+  setInterval(revisarHora, 1000);
+
+  // Universo
+  const cv=document.getElementById('universo'); const ctx=cv.getContext('2d');
+  const dpr=Math.min(window.devicePixelRatio||1,1.5);
+  cv.width=innerWidth*dpr; cv.height=innerHeight*dpr; cv.style.width=innerWidth+'px'; cv.style.height=innerHeight+'px'; ctx.scale(dpr,dpr);
+  let estrellas=[];
+  for(let i=0;i<130;i++) estrellas.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.8+0.4,vel:Math.random()*0.15+0.05,parpadeo:Math.random()*Math.PI*2});
+  let fugaces=[];
+  function nuevaFugaz(){ fugaces.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight*0.4,vx:-6,vy:2,vida:1}); }
+  setInterval(nuevaFugaz, 2800);
+  let t=0;
+  function dibujar(){
+    ctx.fillStyle='#05010f'; ctx.fillRect(0,0,innerWidth,innerHeight);
+    t+=0.02;
+    estrellas.forEach(s=>{
+      s.y+=s.vel*0.2; if(s.y>innerHeight) s.y=0;
+      let alpha=0.4+Math.abs(Math.sin(t+s.parpadeo))*0.6;
+      ctx.globalAlpha=alpha; ctx.fillStyle='#fff';
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
+    });
+    ctx.globalAlpha=1;
+    fugaces=fugaces.filter(f=>f.vida>0);
+    fugaces.forEach(f=>{
+      f.x+=f.vx; f.y+=f.vy; f.vida-=0.02;
+      ctx.strokeStyle='rgba(255,255,255,'+f.vida+')'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.moveTo(f.x,f.y); ctx.lineTo(f.x+60,f.y-20); ctx.stroke();
+    });
+    requestAnimationFrame(dibujar);
+  }
+  dibujar();
+
+  function ir(n){
+    document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('activa'));
+    document.getElementById('pg'+n).classList.add('activa');
+    for(let i=0;i<6;i++){
+      setTimeout(()=>{
+        let c=document.createElement('div'); c.className='corazon-flotante';
+        c.innerText=['💜','✨'][i%2]; c.style.left=(30+Math.random()*40)+'%'; c.style.top='70%';
+        document.body.appendChild(c); setTimeout(()=>c.remove(),1200);
+      }, i*130);
+    }
+  }
+  document.addEventListener('click', (e)=>{
+    if(e.target.tagName==='BUTTON' || e.target.closest('.sobre')) return;
+    if(contenidoEl.style.display==='none') return;
+    let c=document.createElement('div'); c.className='corazon-flotante';
+    c.innerText='💜'; c.style.left=e.clientX+'px'; c.style.top=e.clientY+'px';
+    document.body.appendChild(c); setTimeout(()=>c.remove(),1200);
+  });
+</script>
+</body>
+</html>sta página es para ti, mi 
             <span class="destacado">María Victoria</span>.
         </p>
 
