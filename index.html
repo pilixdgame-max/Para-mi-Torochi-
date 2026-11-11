@@ -32,37 +32,11 @@
   .chip{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);padding:6px 12px;border-radius:20px;font-size:12px;margin:4px}
   .corazon-flotante{position:fixed;pointer-events:none;z-index:50;font-size:26px;animation:subir 1.2s ease-out forwards}
   @keyframes subir{to{transform:translateY(-110px) scale(1.5);opacity:0}}
-  /* CANDADO */
-  #candado{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 30%,#2a0a4a,#05010f 80%)}
-  #candado.activa{display:flex}
-  .candado-emoji{font-size:90px;filter:drop-shadow(0 0 30px #a855f7)}
-  .cuenta{display:flex;gap:10px;margin-top:18px}
-  .caja-cuenta{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:14px 12px;min-width:68px}
-  .caja-cuenta b{font-family:Arial Black,Arial,sans-serif;font-size:24px;display:block}
-  .caja-cuenta span{font-size:11px;color:#e9d5ff}
 </style>
 </head>
 <body>
 <canvas id="universo"></canvas>
 <div class="nebula"></div>
-
-<!-- CANDADO - SE MUESTRA ANTES DEL 11 DE NOVIEMBRE -->
-<div id="candado">
-  <div class="candado-emoji">🔒</div>
-  <h1 style="margin-top:14px">Hay algo para ti...<br><span>pero todavía no</span></h1>
-  <p style="margin-top:12px">Alguien te hizo un universo entero con mucho cariño.<br>Se abrirá justo en tu cumpleaños.</p>
-  <p style="font-size:14px;margin-top:10px"><b>11 de Noviembre • 12:00 AM</b></p>
-  <div class="cuenta">
-    <div class="caja-cuenta"><b id="cd-d">00</b><span>DÍAS</span></div>
-    <div class="caja-cuenta"><b id="cd-h">00</b><span>HORAS</span></div>
-    <div class="caja-cuenta"><b id="cd-m">00</b><span>MIN</span></div>
-    <div class="caja-cuenta"><b id="cd-s">00</b><span>SEG</span></div>
-  </div>
-  <p style="font-size:12px;margin-top:18px;opacity:.7">Guarda este link, vuelve mañana.<br>Valdrá la pena, te lo prometo 💜</p>
-</div>
-
-<!-- CONTENIDO REAL - SOLO SE VE DESDE EL 11 NOV -->
-<div id="contenido" style="display:none">
 
 <div class="pagina activa" id="pg1">
   <div class="corazon-grande">💜</div>
@@ -111,41 +85,7 @@
   <button class="sec" onclick="ir(3)">Volver a leer la carta 💜</button>
 </div>
 
-</div>
-
 <script>
-  // ===== HORA DE APERTURA: 11 NOV 2026, 12:00 AM Venezuela =====
-  const APERTURA = new Date('2026-11-11T00:00:00-04:00').getTime();
-  const candadoEl = document.getElementById('candado');
-  const contenidoEl = document.getElementById('contenido');
-
-  function revisarHora(){
-    const ahora = Date.now();
-    if(ahora >= APERTURA){
-      candadoEl.classList.remove('activa');
-      candadoEl.style.display='none';
-      contenidoEl.style.display='block';
-      // Mostrar primera pagina
-      document.getElementById('pg1').classList.add('activa');
-    } else {
-      candadoEl.classList.add('activa');
-      candadoEl.style.display='flex';
-      contenidoEl.style.display='none';
-      let diff = APERTURA - ahora;
-      let d = Math.floor(diff / (1000*60*60*24));
-      let h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-      let m = Math.floor((diff % (1000*60*60)) / (1000*60));
-      let s = Math.floor((diff % (1000*60)) / 1000);
-      document.getElementById('cd-d').innerText = String(d).padStart(2,'0');
-      document.getElementById('cd-h').innerText = String(h).padStart(2,'0');
-      document.getElementById('cd-m').innerText = String(m).padStart(2,'0');
-      document.getElementById('cd-s').innerText = String(s).padStart(2,'0');
-    }
-  }
-  revisarHora();
-  setInterval(revisarHora, 1000);
-
-  // Universo
   const cv=document.getElementById('universo'); const ctx=cv.getContext('2d');
   const dpr=Math.min(window.devicePixelRatio||1,1.5);
   cv.width=innerWidth*dpr; cv.height=innerHeight*dpr; cv.style.width=innerWidth+'px'; cv.style.height=innerHeight+'px'; ctx.scale(dpr,dpr);
@@ -174,7 +114,6 @@
     requestAnimationFrame(dibujar);
   }
   dibujar();
-
   function ir(n){
     document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('activa'));
     document.getElementById('pg'+n).classList.add('activa');
@@ -188,171 +127,10 @@
   }
   document.addEventListener('click', (e)=>{
     if(e.target.tagName==='BUTTON' || e.target.closest('.sobre')) return;
-    if(contenidoEl.style.display==='none') return;
     let c=document.createElement('div'); c.className='corazon-flotante';
     c.innerText='💜'; c.style.left=e.clientX+'px'; c.style.top=e.clientY+'px';
     document.body.appendChild(c); setTimeout(()=>c.remove(),1200);
   });
 </script>
-</body>
-</html>sta página es para ti, mi 
-            <span class="destacado">María Victoria</span>.
-        </p>
-
-        <div class="poema">
-            "Quise hacer algo diferente, algo que pudiera mostrar<br>
-            lo que siento por ti, algo que ni las palabras puedan explicar.<br><br>
-
-            Miré al cielo, miré las estrellas, miré el universo entero,<br>
-            y me di cuenta de algo: tú eres todo eso para mí.<br><br>
-
-            Eres mi universo, mi galaxia, mi planeta favorito.<br>
-            Y no me quiero ir nunca de ti."
-        </div>
-
-        <p>
-            Gracias por estar conmigo a pesar de la distancia, por cada 
-            mensaje, por cada llamada, por cada momento. 
-            <span class="destacado">Te amo con todo mi corazón.</span>
-        </p>
-
-        <span class="corazon">💛</span>
-
-        <div class="firma">
-            Con amor, tu novio 💛
-        </div>
-
-        <button class="btn-sorpresa" onclick="mostrarAgujero()">
-            🌌 Toca aquí para una sorpresa 🌌
-        </button>
-    </div>
-
-    <!-- SECCIÓN DEL AGUJERO NEGRO -->
-    <div class="seccion-agujero" id="agujeroSeccion">
-        <button class="btn-cerrar" onclick="cerrarAgujero()">✖ Cerrar</button>
-        <div class="titulo-agujero" id="tituloAgujero">Mi universo entero 💛</div>
-        <div class="agujero-negro" id="agujero"></div>
-        <div class="subtitulo-agujero" id="subtituloAgujero">
-            Cada palabra gira alrededor de ti...
-        </div>
-    </div>
-
-    <script>
-        // ===== CREAR ESTRELLAS =====
-        const espacio = document.getElementById('espacio');
-        for (let i = 0; i < 200; i++) {
-            const estrella = document.createElement('div');
-            estrella.className = 'estrella';
-            const tamaño = Math.random() * 3 + 1;
-            estrella.style.width = tamaño + 'px';
-            estrella.style.height = tamaño + 'px';
-            estrella.style.left = Math.random() * 100 + '%';
-            estrella.style.top = Math.random() * 100 + '%';
-            estrella.style.animationDelay = Math.random() * 3 + 's';
-            estrella.style.animationDuration = (2 + Math.random() * 3) + 's';
-            espacio.appendChild(estrella);
-        }
-
-        // ===== PALABRAS HERMOSAS =====
-        const palabras = [
-            'Mi amor 💛',
-            'Mi Torochi 🌻',
-            'Mamor 💛',
-            'Mi universo 🌌',
-            'Mi galaxia ✨',
-            'Mi persona favorita 💫',
-            'Mi todo 🌟',
-            'Te amo 💛',
-            'Mi vida 🌻',
-            'Mi corazón ❤️',
-            'Mi princesa 👑',
-            'Mi compañera 💛',
-            'Mi felicidad 😊',
-            'Mi razón 🌟',
-            'Eres perfecta ✨',
-            'Mi sueño 💫',
-            'Mi estrella ⭐',
-            'Mi paz 🕊️',
-            'Mi alegría 🌻',
-            'Mi futuro 💛'
-        ];
-
-        // ===== MOSTRAR AGUJERO NEGRO =====
-        function mostrarAgujero() {
-            const seccion = document.getElementById('agujeroSeccion');
-            const agujero = document.getElementById('agujero');
-            const titulo = document.getElementById('tituloAgujero');
-            const subtitulo = document.getElementById('subtituloAgujero');
-
-            seccion.classList.add('mostrar');
-
-            // Limpiar palabras anteriores
-            agujero.innerHTML = '';
-
-            // Crear palabras girando
-            palabras.forEach((palabra, index) => {
-                const el = document.createElement('div');
-                el.className = 'palabra-girando';
-                el.textContent = palabra;
-                el.style.animationDuration = (8 + Math.random() * 6) + 's';
-                el.style.animationDelay = (index * 0.3) + 's';
-                el.style.color = ['#ffd700', '#ffed4a', '#ffe066', '#fff8dc'][Math.floor(Math.random() * 4)];
-                el.style.fontSize = (14 + Math.random() * 8) + 'px';
-                agujero.appendChild(el);
-            });
-
-            // Cambiar título cada cierto tiempo
-            let i = 0;
-            setInterval(() => {
-                if (!seccion.classList.contains('mostrar')) return;
-                titulo.textContent = palabras[i % palabras.length];
-                i++;
-            }, 2000);
-
-            // Subtítulo
-            subtitulo.textContent = 'Cada palabra gira alrededor de ti, porque tú eres mi universo entero 💛';
-        }
-
-        // ===== CERRAR AGUJERO =====
-        function cerrarAgujero() {
-            const seccion = document.getElementById('agujeroSeccion');
-            seccion.classList.remove('mostrar');
-        }
-
-        // ===== CONFETI DE FLORES AL ABRIR =====
-        function lanzarConfeti() {
-            for (let i = 0; i < 30; i++) {
-                const flor = document.createElement('div');
-                flor.textContent = ['🌻', '💛', '⭐', '✨'][Math.floor(Math.random() * 4)];
-                flor.style.position = 'fixed';
-                flor.style.left = Math.random() * 100 + '%';
-                flor.style.top = '-50px';
-                flor.style.fontSize = (20 + Math.random() * 20) + 'px';
-                flor.style.zIndex = '999';
-                flor.style.animation = `caerConfeti ${3 + Math.random() * 3}s linear forwards`;
-                document.body.appendChild(flor);
-
-                setTimeout(() => flor.remove(), 6000);
-            }
-        }
-
-        // Agregar animación de confeti
-        const styleConfeti = document.createElement('style');
-        styleConfeti.textContent = `
-            @keyframes caerConfeti {
-                0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
-                100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(styleConfeti);
-
-        // Lanzar confeti al abrir el agujero
-        const originalMostrar = mostrarAgujero;
-        window.mostrarAgujero = function() {
-            originalMostrar();
-            lanzarConfeti();
-        };
-    </script>
-
 </body>
 </html>
