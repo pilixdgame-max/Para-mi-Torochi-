@@ -9,8 +9,8 @@
   body{font-family:Arial, Helvetica, sans-serif;background:#05010f;color:#fff;overflow:hidden;height:100vh}
   canvas{position:fixed;inset:0;z-index:0}
   .nebula{position:fixed;inset:0;z-index:1;background:radial-gradient(circle at 25% 20%,rgba(168,85,247,.35) 0%,transparent 45%),radial-gradient(circle at 80% 70%,rgba(236,72,153,.25) 0%,transparent 50%);pointer-events:none}
-  .pagina{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:10;text-align:center;padding:24px;animation:entrar .7s ease}
-  .pagina.activa{display:flex}
+  .pagina{position:fixed;inset:0;display:none !important;flex-direction:column;align-items:center;justify-content:center;z-index:10;text-align:center;padding:24px}
+  .pagina.activa{display:flex !important;animation:entrar .7s ease}
   @keyframes entrar{from{opacity:0;transform:translateY(15px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
   h1{font-family:Arial Black,Arial,sans-serif;font-size:38px;line-height:1.15}
   h1 span{background:linear-gradient(90deg,#f0abfc,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -32,60 +32,125 @@
   .chip{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);padding:6px 12px;border-radius:20px;font-size:12px;margin:4px}
   .corazon-flotante{position:fixed;pointer-events:none;z-index:50;font-size:26px;animation:subir 1.2s ease-out forwards}
   @keyframes subir{to{transform:translateY(-110px) scale(1.5);opacity:0}}
+  #candado{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 30%,#2a0a4a,#05010f 80%)}
+  #candado.activa{display:flex}
+  .candado-emoji{font-size:90px;filter:drop-shadow(0 0 30px #a855f7)}
+  .cuenta{display:flex;gap:10px;margin-top:18px}
+  .caja-cuenta{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:14px 12px;min-width:68px}
+  .caja-cuenta b{font-family:Arial Black,Arial,sans-serif;font-size:24px;display:block}
+  .caja-cuenta span{font-size:11px;color:#e9d5ff}
 </style>
 </head>
 <body>
 <canvas id="universo"></canvas>
 <div class="nebula"></div>
 
-<div class="pagina activa" id="pg1">
-  <div class="corazon-grande">💜</div>
-  <h1>Te hice<br><span>un universo</span></h1>
-  <p>Dauglin Fuentes, hoy es tu cumpleaños.<br><br>No te voy a decir mucho, mejor <b>míralo tú misma.</b><br>Esto lo hice con todo mi corazón.</p>
-  <div style="margin-top:14px"><span class="chip">✨ Para ti</span><span class="chip">💜 Con cariño</span><span class="chip">🌙 Solo tuyo</span></div>
-  <button onclick="ir(2)">Entrar a mi universo ✨</button>
-</div>
-
-<div class="pagina" id="pg2">
-  <h1 style="font-size:30px">Hay algo<br><span>que te escribí...</span></h1>
-  <p>Toca el sobre, es una cartita que te hice. De pana me costó, pero valió la pena.</p>
-  <div class="sobre" onclick="ir(3)">
-    <div class="tapa"></div>
-    <div class="sello">💜</div>
-    <div class="texto">PARA DAUGLIN • ÁBREME</div>
+<div id="candado">
+  <div class="candado-emoji">🔒</div>
+  <h1 style="margin-top:14px">Hay algo para ti...<br><span>pero todavía no</span></h1>
+  <p style="margin-top:12px">Alguien te hizo un universo entero con mucho cariño.<br>Se abrirá justo en tu cumpleaños.</p>
+  <p style="font-size:14px;margin-top:10px"><b>11 de Noviembre • 12:00 AM</b></p>
+  <div class="cuenta">
+    <div class="caja-cuenta"><b id="cd-d">00</b><span>DÍAS</span></div>
+    <div class="caja-cuenta"><b id="cd-h">00</b><span>HORAS</span></div>
+    <div class="caja-cuenta"><b id="cd-m">00</b><span>MIN</span></div>
+    <div class="caja-cuenta"><b id="cd-s">00</b><span>SEG</span></div>
   </div>
-  <p style="font-size:13px;opacity:.8">Tócalo, no muerde 😂💜</p>
-  <button class="sec" onclick="ir(1)">Volver</button>
+  <p style="font-size:12px;margin-top:18px;opacity:.7">Guarda este link, vuelve mañana.<br>Valdrá la pena, te lo prometo 💜</p>
 </div>
 
-<div class="pagina" id="pg3">
-  <div class="carta">
-    <h2>💜 Para Dauglin 💜</h2>
-    <div class="fecha">En tu cumpleaños • Con cariño</div>
-    <p>Hola Dauglin,</p>
-    <p>Feliz cumpleaños. Hoy no quería solo escribirte "feliz cumpleaños" y ya. Quería hacerte algo diferente, algo que de verdad te hiciera sonreír.</p>
-    <p>Por eso te hice todo esto. Un universo, una carta, un lugar que es solo tuyo. Me tomé mi tiempo, le puse cariño, le puse empeño, porque tú te lo mereces.</p>
-    <p>Me encanta tu forma de ser, tu sonrisa, tu energía, esa forma tan tuya de hacer que todo se sienta más bonito. Hablar contigo hace que mi día se ponga mejor, de pana.</p>
-    <p>No te escribo esto para presionarte ni para que te sientas incómoda, para nada. Te lo escribo porque hoy es tu día y quería que fuera especial, que supieras que hay alguien que piensa en ti y que se esforzó por hacerte feliz.</p>
-    <p>Te deseo que este nuevo año te traiga todo lo bonito: que cumplas todos tus sueños, que rías mucho, que nunca te falte gente que te quiera de verdad, y que sigas siendo esa persona tan increíble que eres.</p>
-    <p>Gracias por existir, gracias por dejarme conocerte, y gracias por ser tú.</p>
-    <p>Feliz cumpleaños, Dauglin Fuentes. Te hice un universo entero, porque un solo mundo no me alcanzaba para decirte lo especial que eres.</p>
-    <div class="firma">Con mucho cariño 💜<br>De alguien que te admira mucho</div>
-    <p class="posdata">P.D: Toca la pantalla, hay una sorpresa más ✨</p>
+<div id="contenido" style="display:none">
+  <div class="pagina" id="pg1">
+    <div class="corazon-grande">💜</div>
+    <h1>Te hice<br><span>un universo</span></h1>
+    <p>Dauglin Fuentes, hoy es tu cumpleaños.<br><br>No te voy a decir mucho, mejor <b>míralo tú misma.</b><br>Esto lo hice con todo mi corazón.</p>
+    <div style="margin-top:14px"><span class="chip">✨ Para ti</span><span class="chip">💜 Con cariño</span><span class="chip">🌙 Solo tuyo</span></div>
+    <button onclick="ir(2)">Entrar a mi universo ✨</button>
   </div>
-  <button onclick="ir(4)">Ver mi universo 🌌</button>
-</div>
 
-<div class="pagina" id="pg4">
-  <div style="font-size:65px;animation:latido 1.4s infinite">🎂</div>
-  <h1 style="margin-top:10px">Feliz Cumpleaños<br><span>Dauglin Fuentes</span></h1>
-  <p>Mira arriba, todas esas estrellitas son para ti.<br><br><b>Cada una es un deseo:</b> que seas feliz, que cumplas tus sueños, que nunca dejes de brillar.</p>
-  <div style="margin-top:14px"><span class="chip">🌟 Que seas feliz</span><span class="chip">💜 Que cumplas tus sueños</span><span class="chip">✨ Que sigas brillando</span></div>
-  <p style="font-size:12px;margin-top:16px;opacity:.75">Hecho con mucho amor, cariño y empeño, solo para ti.<br>Tu universo, Dauglin. 💜<br>Esto queda aquí para siempre.</p>
-  <button class="sec" onclick="ir(3)">Volver a leer la carta 💜</button>
+  <div class="pagina" id="pg2">
+    <h1 style="font-size:30px">Hay algo<br><span>que te escribí...</span></h1>
+    <p>Toca el sobre, es una cartita que te hice. De pana me costó, pero valió la pena.</p>
+    <div class="sobre" onclick="ir(3)">
+      <div class="tapa"></div>
+      <div class="sello">💜</div>
+      <div class="texto">PARA DAUGLIN • ÁBREME</div>
+    </div>
+    <p style="font-size:13px;opacity:.8">Tócalo, no muerde 😂💜</p>
+    <button class="sec" onclick="ir(1)">Volver</button>
+  </div>
+
+  <div class="pagina" id="pg3">
+    <div class="carta">
+      <h2>💜 Para Dauglin <h2>
+      <div class="fecha">En tu cumpleaños • Con cariño</div>
+      <p>Hola Dauglin,</p>
+      <p>Feliz cumpleaños. Hoy no quería solo escribirte "feliz cumpleaños" y ya. Quería hacerte algo diferente, algo que de verdad te hiciera sonreír.</p>
+      <p>Por eso te hice todo esto. Un universo, una carta, un lugar que es solo tuyo. Me tomé mi tiempo, le puse cariño, le puse empeño, porque tú te lo mereces.</p>
+      <p>Me encanta tu forma de ser, tu sonrisa, tu energía, esa forma tan tuya de hacer que todo se sienta más bonito. Hablar contigo hace que mi día se ponga mejor, de pana.</p>
+      <p>No te escribo esto para presionarte ni para que te sientas incómoda, para nada. Te lo escribo porque hoy es tu día y quería que fuera especial, que supieras que hay alguien que piensa en ti y que se esforzó por hacerte feliz.</p>
+      <p>Te deseo que este nuevo año te traiga todo lo bonito: que cumplas todos tus sueños, que rías mucho, que nunca te falte gente que te quiera de verdad, y que sigas siendo esa persona tan increíble que eres.</p>
+      <p>Gracias por existir, gracias por dejarme conocerte, y gracias por ser tú.</p>
+      <p>Feliz cumpleaños, Dauglin Fuentes. Te hice un universo entero, porque un solo mundo no me alcanzaba para decirte lo especial que eres.</p>
+      <div class="firma">Con mucho cariño 💜<br>De alguien que te admira mucho</div>
+      <p class="posdata">P.D: Toca la pantalla, hay una sorpresa más ✨</p>
+    </div>
+    <button onclick="ir(4)">Ver mi universo 🌌</button>
+  </div>
+
+  <div class="pagina" id="pg4">
+    <div style="font-size:65px;animation:latido 1.4s infinite">🎂</div>
+    <h1 style="margin-top:10px">Feliz Cumpleaños<br><span>Dauglin Fuentes</span></h1>
+    <p>Mira arriba, todas esas estrellitas son para ti.<br><br><b>Cada una es un deseo:</b> que seas feliz, que cumplas tus sueños, que nunca dejes de brillar.</p>
+    <div style="margin-top:14px"><span class="chip">🌟 Que seas feliz</span><span class="chip">💜 Que cumplas tus sueños</span><span class="chip">✨ Que sigas brillando</span></div>
+    <p style="font-size:12px;margin-top:16px;opacity:.75">Hecho con mucho amor, cariño y empeño, solo para ti.<br>Tu universo, Dauglin. 💜<br>Esto queda aquí para siempre.</p>
+    <button class="sec" onclick="ir(3)">Volver a leer la carta 💜</button>
+  </div>
 </div>
 
 <script>
+  // HOY ES 11 - YA ESTA ABIERTO PARA SIEMPRE
+  const APERTURA = new Date('2026-11-11T00:00:00-04:00').getTime();
+  const candadoEl = document.getElementById('candado');
+  const contenidoEl = document.getElementById('contenido');
+  let yaDesbloqueado = false;
+
+  function mostrarSolo(n){
+    document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('activa'));
+    const pg = document.getElementById('pg'+n);
+    if(pg) pg.classList.add('activa');
+  }
+
+  function revisarHora(){
+    const ahora = Date.now();
+    if(ahora >= APERTURA){
+      // SOLO LA PRIMERA VEZ mostramos pg1, despues NO tocamos nada
+      if(!yaDesbloqueado){
+        yaDesbloqueado = true;
+        candadoEl.classList.remove('activa');
+        candadoEl.style.display='none';
+        contenidoEl.style.display='block';
+        mostrarSolo(1);
+      }
+      return; // <- AQUI ESTABA EL ERROR, antes seguia devolviendo a pg1 cada segundo
+    } else {
+      candadoEl.classList.add('activa');
+      candadoEl.style.display='flex';
+      contenidoEl.style.display='none';
+      let diff = APERTURA - ahora;
+      let d = Math.floor(diff / (1000*60*60*24));
+      let h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+      let m = Math.floor((diff % (1000*60*60)) / (1000*60));
+      let s = Math.floor((diff % (1000*60)) / 1000);
+      document.getElementById('cd-d').innerText = String(d).padStart(2,'0');
+      document.getElementById('cd-h').innerText = String(h).padStart(2,'0');
+      document.getElementById('cd-m').innerText = String(m).padStart(2,'0');
+      document.getElementById('cd-s').innerText = String(s).padStart(2,'0');
+    }
+  }
+  revisarHora();
+  setInterval(revisarHora, 1000);
+
   const cv=document.getElementById('universo'); const ctx=cv.getContext('2d');
   const dpr=Math.min(window.devicePixelRatio||1,1.5);
   cv.width=innerWidth*dpr; cv.height=innerHeight*dpr; cv.style.width=innerWidth+'px'; cv.style.height=innerHeight+'px'; ctx.scale(dpr,dpr);
@@ -114,9 +179,9 @@
     requestAnimationFrame(dibujar);
   }
   dibujar();
+
   function ir(n){
-    document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('activa'));
-    document.getElementById('pg'+n).classList.add('activa');
+    mostrarSolo(n);
     for(let i=0;i<6;i++){
       setTimeout(()=>{
         let c=document.createElement('div'); c.className='corazon-flotante';
@@ -127,10 +192,11 @@
   }
   document.addEventListener('click', (e)=>{
     if(e.target.tagName==='BUTTON' || e.target.closest('.sobre')) return;
+    if(contenidoEl.style.display==='none') return;
     let c=document.createElement('div'); c.className='corazon-flotante';
     c.innerText='💜'; c.style.left=e.clientX+'px'; c.style.top=e.clientY+'px';
     document.body.appendChild(c); setTimeout(()=>c.remove(),1200);
   });
 </script>
 </body>
-</html>
+                                                        </html>
